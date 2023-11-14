@@ -1,3 +1,5 @@
+import { AppWrapper } from "@/context"
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +7,11 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <AppWrapper>
+          {children}
+        </AppWrapper>
+      </body>
     </html>
   )
 }
