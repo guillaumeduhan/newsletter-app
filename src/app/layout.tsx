@@ -1,4 +1,6 @@
-import { AppWrapper } from "@/context"
+"use client";
+
+import { AppWrapper } from "@/context";
 
 export default function RootLayout({
   children,
