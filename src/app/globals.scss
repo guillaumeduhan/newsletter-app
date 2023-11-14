@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-[17px];
+  }
+
+  button {
+    @apply item text-center rounded-lg px-5 py-2 cursor-pointer hover:opacity-80 transition hover:shadow-sm disabled:opacity-50 disabled:bg-slate-100 disabled:text-gray-500 font-semibold;
+
+
+    &.primary {
+      
+    }
+  }
+
+  .item {
+    @apply bg-transparent outline-none border rounded focus:border-slate-300 focus:shadow-sm transition;
+  }
+
+  input[type="email"],
+  input[type="number"],
+  input[type="date"],
+  input[type="text"] {
+    @apply item px-3 py-2;
+  }
+}

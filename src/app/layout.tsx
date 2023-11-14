@@ -1,6 +1,7 @@
 "use client";
 
 import { AppWrapper } from "@/context";
+import './globals.scss';
 
 export default function RootLayout({
   children,
