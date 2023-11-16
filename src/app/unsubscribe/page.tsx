@@ -7,29 +7,29 @@ import Image from "next/image";
 import { useState } from "react";
 import banner from '../../../public/banner.png';
 
-export default function Subscribe() {
+export default function Unsubscribe() {
   const { supabase } = useAppContext();
   const [email, setEmail] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
-  const [success, setSuccess] = useState<boolean | undefined>(undefined)
+  const [success, setSuccess] = useState<boolean | undefined>(true)
   const [message, setMessage] = useState<string>('')
 
-  const subscribeToNewsletter = async () => {
+  const unsubscribeToNewsletter = async () => {
     if (!isValidEmail(email)) return alert(`Please enter your email address`);
     try {
       setLoading(true) 
       
       const { data, error } = await supabase
         .from('subscribers')
-        .insert({ email, owner_id: '6913d6e5-95ca-4d91-a6cf-ea7cc658a802' }) // TODO
-        .select()
+        .delete()
+        .eq('email', email)
       
       if (data) {
         return setSuccess(true)
       }
 
       if (error) {
-        setMessage('You are already subscribed.')
+        setMessage('You are already unsubscribed.')
       }
 
     } catch (error: any) {
@@ -48,7 +48,7 @@ export default function Subscribe() {
       />
       <div className="grid gap-4 px-8 pb-6 text-center">
         {!success && <>
-          <p>Top 5 links of the week about coding.</p>
+          <p>We are sorry to see you leaving...</p>
           <div className='grid'>
             <input
               type='email'
@@ -62,14 +62,14 @@ export default function Subscribe() {
             <div className="notification">{message}</div>
           </>}
           {success === false && <>
-            <div className="notification error">Sorry your subscription has failed.</div>
+            <div className="notification error">Sorry your unsubscription has failed.</div>
           </>}
           <div>
-            <Button label={'Subscribe 👉'} loading={loading} color="primary" onClick={subscribeToNewsletter} />
+            <Button label={'Unsubscribe 👉'} loading={loading} color="primary" onClick={unsubscribeToNewsletter} />
           </div>
         </>}
         {success && <>
-          <div className="notification success">You have successfully subscribed.</div>
+          <div className="notification success">You are successfully unsubscribed.</div>
         </>}
       </div>
     </div>

@@ -4,12 +4,12 @@ import { User } from "@/types";
 import { createClient } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
 
-interface IAppContext {
-  user: User | undefined;
-  supabase: any;
-}
+// interface IAppContext {
+//   user: User | undefined;
+//   supabase: any;
+// }
 
-const AppContext = createContext<IAppContext | undefined>(undefined)
+const AppContext = createContext<any>(undefined)
 
 export function AppWrapper({ children }: {
   children: React.ReactNode

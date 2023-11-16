@@ -4,7 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
 
-  if (req.nextUrl.pathname.startsWith("/subscribe")) {
+  const publicUrls = ['/subscribe', '/unsubscribe']
+
+  if (publicUrls.includes(req.nextUrl.pathname)) {
     return res
   }
 
