@@ -11,7 +11,7 @@ export default function Unsubscribe() {
   const { supabase } = useAppContext();
   const [email, setEmail] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
-  const [success, setSuccess] = useState<boolean | undefined>(true)
+  const [success, setSuccess] = useState<boolean | undefined>(undefined)
   const [message, setMessage] = useState<string>('')
 
   const unsubscribeToNewsletter = async () => {
@@ -19,7 +19,20 @@ export default function Unsubscribe() {
     try {
       setLoading(true) 
       
-      // call api endpoint
+      const response = await fetch('/api/unsubscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email})
+      })
+
+      if (response) {
+        const { status } = response;
+
+        if (status === 200) return setSuccess(true)
+        setSuccess(false)
+      }
 
     } catch (error: any) {
       setSuccess(false)
