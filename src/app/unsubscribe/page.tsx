@@ -19,18 +19,7 @@ export default function Unsubscribe() {
     try {
       setLoading(true) 
       
-      const { data, error } = await supabase
-        .from('subscribers')
-        .delete()
-        .eq('email', email)
-      
-      if (data) {
-        return setSuccess(true)
-      }
-
-      if (error) {
-        setMessage('You are already unsubscribed.')
-      }
+      // call api endpoint
 
     } catch (error: any) {
       setSuccess(false)

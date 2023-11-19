@@ -21,7 +21,7 @@ export default function Subscribe() {
       
       const { data, error } = await supabase
         .from('subscribers')
-        .insert({ email, owner_id: '6913d6e5-95ca-4d91-a6cf-ea7cc658a802' }) // TODO
+        .insert({ email })
         .select()
       
       if (data) {
@@ -29,7 +29,7 @@ export default function Subscribe() {
       }
 
       if (error) {
-        setMessage('You are already subscribed.')
+        return setMessage('You are already subscribed.')
       }
 
     } catch (error: any) {
