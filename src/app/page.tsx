@@ -1,3 +1,9 @@
+'use client';
+
 export default function Home() {
-  return <div>I am logged in</div>
+  return <div>
+    <header className="flex items-start justify-between">
+      <h1>Welcome !</h1>
+    </header>
+  </div>
 }
