@@ -4,7 +4,7 @@ import { limitString } from '@/lib/utils';
 import Avatar from '../Avatar';
 
 export default function UserItem() {
-  const { user = { email: 'cool' } } = useAppContext()
+  const { user = { email: 'newsletter@codewithguillaume.com' } } = useAppContext()
 
   return <div className="flex items-center justify-start w-full gap-3 px-2 py-2 text-black transition shadow-sm cursor-pointer border rounded-xl hover:bg-gray-50">
     <div className='relative'>
