@@ -1,5 +1,6 @@
 "use client";
 
+import Sidebar from "@/components/Sidebar";
 import { supabase } from "@/lib/supabase";
 import { User } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -23,7 +24,7 @@ export function AppWrapper({ children }: {
 
         if (data) {
           console.log(data)
-          setUser(data.user)
+          setUser(data.session.user)
         }
       } catch (e) {
         // Handle error
@@ -40,9 +41,15 @@ export function AppWrapper({ children }: {
 
   return <AppContext.Provider value={{
     user,
+    setUser,
     supabase
   }}>
-    {children}
+    <main className="flex items-start justify-start w-full">
+      {user && <Sidebar />}
+      <div className="w-full h-full">
+        {children}
+      </div>
+    </main>
   </AppContext.Provider>
 }
 
