@@ -20,11 +20,11 @@ export default function Home() {
         <Subscribers />
       </Card>
       <Card title="Emails sent" count={0}>
-        <Email />
-      </Card>
-      <Card title="Lists" count={0}>
-        <Lists />
-      </Card>
-    </main>
-  </div>
+  <Email />
+      </Card >
+    <Card title="Lists" count={0}>
+      <Lists />
+    </Card>
+    </main >
+  </div >
 }

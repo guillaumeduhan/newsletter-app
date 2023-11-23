@@ -1,5 +1,4 @@
 "use client";
-
 import { AppWrapper } from "@/context";
 import './globals.scss';
 
