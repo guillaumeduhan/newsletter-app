@@ -1,32 +1,30 @@
 "use client";
 
+import { supabase } from "@/lib/supabase";
 import { User } from "@/types";
-import { createClient } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
-
-// interface IAppContext {
-//   user: User | undefined;
-//   supabase: any;
-// }
 
 const AppContext = createContext<any>(undefined)
 
 export function AppWrapper({ children }: {
   children: React.ReactNode
 }) {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-  )
   const [user, setUser] = useState<User | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchCurrentUser = () => {
+    const fetchCurrentUser = async () => {
       try {
         setLoading(true);
 
-        // supabase fetch current user
+        const {
+          data
+        }: any = await supabase.auth.getSession()
+
+        if (data) {
+          console.log(data)
+          setUser(data.user)
+        }
       } catch (e) {
         // Handle error
         console.log(e);
@@ -34,7 +32,7 @@ export function AppWrapper({ children }: {
         setLoading(false);
       }
     }
-    
+
     fetchCurrentUser();
   }, [])
 
