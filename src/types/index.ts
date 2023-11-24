@@ -13,9 +13,11 @@ type SubscriberStatus = typeof SubscriberStatusArray[number];
 
 export type Campaign = {
   name: string;
-  list_id: string;
-  status: CampaignStatus;
-  user_id: string;
+  from: string | undefined;
+  subject: string | undefined;
+  list_id: string | undefined;
+  status: CampaignStatus | undefined;
+  user_id: string | undefined;
 } & CommonFields;
 
 export type Email = {

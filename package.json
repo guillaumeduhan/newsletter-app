@@ -23,7 +23,8 @@
     "react-dom": "^18",
     "react-email": "^1.9.5",
     "resend": "^2.0.0",
-    "sass": "^1.69.5"
+    "sass": "^1.69.5",
+    "sonner": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "^20",

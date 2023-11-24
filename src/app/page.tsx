@@ -6,6 +6,7 @@ import { Email } from "@/components/Icons/Email";
 import { Lists } from "@/components/Icons/Lists";
 import { Subscribers } from "@/components/Icons/Subscribers";
 
+
 export default function Home() {
   return <div>
     <header className="flex items-start justify-between mb-8">
@@ -21,10 +22,10 @@ export default function Home() {
       </Card>
       <Card title="Emails sent" count={0}>
         <Email />
-      </Card>
+      </Card >
       <Card title="Lists" count={0}>
         <Lists />
       </Card>
-    </main>
-  </div>
+    </main >
+  </div >
 }
