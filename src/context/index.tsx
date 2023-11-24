@@ -37,16 +37,16 @@ export function AppWrapper({ children }: {
     fetchCurrentUser();
   }, [])
 
-  if (loading) return <div>Loading...</div>
+  if (loading && !user) return <div>Loading...</div>
 
   return <AppContext.Provider value={{
     user,
     setUser,
     supabase
   }}>
-    <main className="flex items-start justify-start w-full">
+    <main className="flex items-start justify-start w-full relative">
       {user && <Sidebar />}
-      <div className="w-full h-full">
+      <div className="w-full h-full p-6">
         {children}
       </div>
     </main>

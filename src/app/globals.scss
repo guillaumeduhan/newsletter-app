@@ -2,44 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply text-[17px];
+body {
+  @apply text-base;
+}
+
+button {
+  @apply item text-center rounded-lg px-5 py-2 cursor-pointer hover:opacity-80 transition hover:shadow-sm disabled:opacity-50 disabled:bg-slate-100 disabled:text-gray-500 font-semibold;
+
+  &.primary {
+    @apply text-white border-none shadow-lg shadow-primary-100 bg-primary-700;
+  }
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-xl font-medium;
+}
+
+.item {
+  @apply outline-none border rounded focus:border-slate-300 focus:shadow-sm transition;
+}
+
+label {
+  @apply mb-1 font-medium;
+}
+
+select,
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+input[type="text"] {
+  @apply item px-3 py-2;
+}
+
+.disabled {
+  @apply bg-gray-100 text-gray-400;
+}
+
+.notification {
+  @apply bg-gray-100 text-gray-800 border-gray-800 rounded-lg py-2 px-4;
+
+  &.success {
+    @apply bg-green-100 text-green-800 border-green-800;
   }
 
-  button {
-    @apply item text-center rounded-lg px-5 py-2 cursor-pointer hover:opacity-80 transition hover:shadow-sm disabled:opacity-50 disabled:bg-slate-100 disabled:text-gray-500 font-semibold;
-
-    &.primary {
-      @apply text-white bg-primary-700;
-    }
-  }
-
-  .item {
-    @apply bg-transparent outline-none border rounded focus:border-slate-300 focus:shadow-sm transition;
-  }
-  
-  label {
-    @apply font-medium mb-1;
-  }
-
-  input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="date"],
-  input[type="text"] {
-    @apply item px-3 py-2;
-  }
-
-  .notification {
-    @apply bg-gray-100 text-gray-800 border-gray-800 rounded-lg py-2 px-4;
-
-    &.success {
-      @apply bg-green-100 text-green-800 border-green-800;
-    }
-
-    &.error {
-      @apply bg-red-100 text-red-800 border-red-800;
-    }
+  &.error {
+    @apply bg-red-100 text-red-800 border-red-800;
   }
 }
