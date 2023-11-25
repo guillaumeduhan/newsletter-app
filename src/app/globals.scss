@@ -7,19 +7,31 @@ body {
 }
 
 button {
-  @apply item text-center rounded-lg px-5 py-2 cursor-pointer hover:opacity-80 transition hover:shadow-sm disabled:opacity-50 disabled:bg-slate-100 disabled:text-gray-500 font-semibold;
+  @apply item text-center rounded-lg px-5 py-2 cursor-pointer hover:opacity-80 transition hover:shadow-sm disabled:opacity-50 disabled:bg-slate-100 disabled:text-gray-500 font-semibold #{!important};
 
   &.primary {
     @apply text-white border-none shadow-lg shadow-primary-100 bg-primary-700;
   }
 }
 
+.novel-relative {
+  @apply border-none shadow-none min-h-[200px] #{!important};
+
+  a {
+    @apply text-primary-500 font-bold;
+  }
+
+  .tiptap {
+    @apply p-1 #{!important};
+  }
+}
+
 h1 {
-  @apply text-3xl;
+  @apply text-3xl #{!important};
 }
 
 h2 {
-  @apply text-xl font-medium;
+  @apply text-xl font-medium #{!important};
 }
 
 .item {

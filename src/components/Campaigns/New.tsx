@@ -1,6 +1,7 @@
 'use client';
 
 import { useCampaigns } from "@/hooks/useCampaigns";
+import MainTemplate from "../Templates/Main";
 
 export default function NewCampaign() {
   const { newCampaign, setNewCampaign } = useCampaigns()
@@ -60,7 +61,7 @@ export default function NewCampaign() {
       </div>
     </div>
     <div className="w-full h-full">
-      Editor
+      <MainTemplate content="hello" />
     </div>
   </div>;
 }

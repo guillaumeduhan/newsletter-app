@@ -23,12 +23,10 @@ export function AppWrapper({ children }: {
         }: any = await supabase.auth.getSession()
 
         if (data) {
-          console.log(data)
           setUser(data.session.user)
         }
       } catch (e) {
         // Handle error
-        console.log(e);
       } finally {
         setLoading(false);
       }
