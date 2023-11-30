@@ -15,7 +15,11 @@ button {
 }
 
 .novel-relative {
-  @apply border-none shadow-none min-h-[200px] #{!important};
+  @apply border-none shadow-none min-h-[100px] #{!important};
+
+  button {
+    @apply py-2 px-2 #{!important};
+  }
 
   a {
     @apply text-primary-500 font-bold;

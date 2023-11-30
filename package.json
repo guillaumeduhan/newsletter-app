@@ -16,6 +16,9 @@
     "@react-email/text": "^0.0.6",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.38.4",
+    "@tiptap/extension-paragraph": "^2.1.12",
+    "@tiptap/extension-text": "^2.1.12",
+    "@tiptap/html": "^2.1.12",
     "dayjs": "^1.11.10",
     "next": "14.0.2",
     "novel": "^0.1.22",
@@ -25,7 +28,7 @@
     "react-email": "^1.9.5",
     "resend": "^2.0.0",
     "sass": "^1.69.5",
-    "sonner": "^1.2.2"
+    "sonner": "^1.2.3"
   },
   "devDependencies": {
     "@types/node": "^20",

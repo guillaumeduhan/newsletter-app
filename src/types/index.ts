@@ -18,10 +18,10 @@ export type Campaign = {
   list_id: string | undefined;
   status: CampaignStatus | undefined;
   user_id: string | undefined;
+  email_id: string | undefined;
 } & CommonFields;
 
 export type Email = {
-  campaign_id?: string;
   title: string;
   content: string;
   status: EmailStatus;

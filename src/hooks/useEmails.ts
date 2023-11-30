@@ -1,7 +1,8 @@
-import { Email, EmailStatusArray } from "@/types"
-import { useState } from "react"
+import { Email, EmailStatusArray } from "@/types";
+import { useState } from "react";
 
 export const useEmails = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<Email>({
     title: 'A new email',
     content: '',
@@ -10,6 +11,8 @@ export const useEmails = () => {
 
   return {
     email,
-    setEmail
+    setEmail,
+    loading,
+    setLoading
   }
 }

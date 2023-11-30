@@ -3,6 +3,7 @@
 import { User } from "@/types";
 
 interface AvatarProps {
+  children?: React.ReactNode;
   user: User | undefined;
   small?: boolean;
 }

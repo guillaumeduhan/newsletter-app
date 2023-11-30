@@ -1,10 +1,11 @@
 'use client';
-
-import { useCampaigns } from "@/hooks/useCampaigns";
-import MainTemplate from "../Templates/Main";
+import MainTemplate from '@/components/Template/Main';
+import { useCampaigns } from '@/hooks/useCampaigns';
+import { useEmails } from '@/hooks/useEmails';
 
 export default function NewCampaign() {
-  const { newCampaign, setNewCampaign } = useCampaigns()
+  const { newCampaign, setNewCampaign } = useCampaigns();
+  const { email, setEmail } = useEmails()
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -12,10 +13,10 @@ export default function NewCampaign() {
       ...prev,
       [name]: value,
     }));
-  }
+  };
 
   return <div className='flex items-start justify-between w-full h-full'>
-    <div className="w-[400px] h-full border-r p-6 flex flex-col gap-4">
+    <div className='w-[400px] h-full border-r p-6 flex flex-col gap-4'>
       <div className='grid'>
         <label>Name</label>
         <input
@@ -29,18 +30,16 @@ export default function NewCampaign() {
         <label>From</label>
         <input
           type='text'
-          name='object'
-          className="disabled"
+          name='from'
           value={newCampaign?.from}
           onChange={handleChange}
-          disabled
         />
       </div>
       <div className='grid'>
         <label>Subject</label>
         <input
           type='text'
-          name='date'
+          name='subject'
           value={newCampaign?.subject}
           onChange={handleChange}
         />
@@ -48,8 +47,8 @@ export default function NewCampaign() {
       <div className='grid'>
         <label>Select a list</label>
         <select
-          name='select'
-          value={newCampaign.list_id}
+          name='list_id'
+          value={newCampaign?.list_id}
           onChange={handleChange}
         >
           {[].map((i: any) => (
@@ -60,8 +59,16 @@ export default function NewCampaign() {
         </select>
       </div>
     </div>
-    <div className="w-full h-full">
-      <MainTemplate content="hello" />
+    <div className='grid w-full'>
+      <MainTemplate
+        onContent={(content: any) =>
+          setEmail((prev: any) => ({
+            ...prev,
+            content
+          })
+          )
+        }
+      />
     </div>
   </div>;
 }

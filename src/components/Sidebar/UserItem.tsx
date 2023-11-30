@@ -8,9 +8,7 @@ export default function UserItem() {
 
   return <div className="flex items-center justify-start w-full gap-3 px-2 py-2 text-black transition shadow-sm cursor-pointer border rounded-xl hover:bg-gray-50">
     <div className='relative'>
-      <Avatar user={user}>
-        image here
-      </Avatar>
+      <Avatar user={user} />
     </div>
     <div className='grid grow w-full'>
       <div className='text-sm antialiased font-semibold whitespace-nowrap'>

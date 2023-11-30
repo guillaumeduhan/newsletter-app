@@ -9,9 +9,9 @@ import { Subscribers } from "@/components/Icons/Subscribers";
 import Slidebar from "@/components/Slidebar";
 import { useState } from "react";
 
-
 export default function Home() {
-  const [show, setShow] = useState<boolean>(false)
+  const [show, setShow] = useState<boolean>(true);
+
   return <div>
     <header className="flex items-start justify-between mb-8">
       <h1>Welcome !</h1>
