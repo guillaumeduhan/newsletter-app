@@ -1,5 +1,6 @@
 "use client";
 import { AppWrapper } from "@/context";
+import { Toaster } from "sonner";
 import './globals.scss';
 
 export default function RootLayout({
@@ -13,6 +14,7 @@ export default function RootLayout({
         <AppWrapper>
           {children}
         </AppWrapper>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   )

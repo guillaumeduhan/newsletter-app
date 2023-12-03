@@ -52,7 +52,7 @@ input[type="number"],
 input[type="password"],
 input[type="date"],
 input[type="text"] {
-  @apply item px-3 py-2;
+  @apply item px-3 py-2 #{!important};
 }
 
 .disabled {

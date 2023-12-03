@@ -25,7 +25,7 @@ export default function Template({ content = 'Hello world' }: Props) {
               alt="Codewithguillaume's newsletter"
             />
             <Section className="mx-6 my-6 text-[16px] leading-[23px]">
-              <Text>{content}</Text>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
               <Hr />
               <Row>
                 <Text>

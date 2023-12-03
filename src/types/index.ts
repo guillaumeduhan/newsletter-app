@@ -3,7 +3,7 @@ type CommonFields = {
   created_at?: string;
 }
 
-export const CampaignStatusArray = ['Active', 'Inactive', 'Archived'];
+export const CampaignStatusArray = ['Draft', 'Active', 'Inactive', 'Archived'];
 export const EmailStatusArray = ['Draft', 'Completed'];
 export const SubscriberStatusArray = ['Active', 'Archived', 'Inactive'];
 

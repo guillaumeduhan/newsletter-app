@@ -31,8 +31,8 @@ export default function Home() {
         <Lists />
       </Card>
     </main>
-    {show && <Slidebar title="New campaign" onClose={() => setShow(false)}>
-      <NewCampaign />
+    {show && <Slidebar>
+      <NewCampaign onClose={() => setShow(false)} />
     </Slidebar>}
   </div>
 }

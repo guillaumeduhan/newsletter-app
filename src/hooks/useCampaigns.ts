@@ -1,7 +1,6 @@
 import { supabase } from "@/lib/supabase";
 import { Campaign, Email } from "@/types";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export const useCampaigns = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -17,6 +16,8 @@ export const useCampaigns = () => {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
 
   const saveEmail = async (email: Email) => {
+    if (!email) return 'Missing email content!'
+
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -27,16 +28,14 @@ export const useCampaigns = () => {
       
       if (data) return data
       return false
-    } catch (error) {
-      return toast.error('Error saving email!')
+    } catch (error: any) {
+      throw new Error(error)
     } finally {
       setLoading(false)
     }
   }
 
   const saveCampaign = async (campaign: Campaign, email: Email) => {
-    if (!email || !email.content) return toast.error('Missing email content!');
-
     try {
       setLoading(true);
 
@@ -51,13 +50,13 @@ export const useCampaigns = () => {
           .upsert(campaign)
           .select()
         
-        if (data) toast.success('Successfully saved campaign!')
+        if (data) return data
       }
-      return toast.error('Email could not be saved!')
-    } catch (error) {
-      toast.error('Error saving campaign!')
+      return emailSaved
+    } catch (error: any) {
+      throw new Error(error)
     } finally {
-     setLoading(false)
+      setLoading(false)
     }
   }
 
