@@ -3,13 +3,13 @@ import { Campaign, Email } from "@/types";
 import { useState } from "react";
 
 export const useCampaigns = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [newCampaign, setNewCampaign] = useState<Campaign>({
     name: "A new campaign",
     from: "newsletter@codewithguillaume.com",
     subject: undefined,
     list_id: undefined,
-    status: 'Inactive',
+    status: 'Draft',
     user_id: undefined,
     email_id: undefined
   });
@@ -20,9 +20,10 @@ export const useCampaigns = () => {
 
     try {
       setLoading(true)
+
       const { data, error } = await supabase
         .from('emails')
-        .insert(email)
+        .upsert(email)
         .select()
         .single()
       
@@ -66,7 +67,7 @@ export const useCampaigns = () => {
       
       const { data, error } = await supabase
         .from('campaigns')
-        .select('*')
+        .select('*, email_id(*)')
       
       if (data) setCampaigns(data)
     } catch (error) {
@@ -78,6 +79,7 @@ export const useCampaigns = () => {
 
   return {
     loading,
+    setLoading,
     newCampaign,
     setNewCampaign,
     campaigns,

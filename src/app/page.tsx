@@ -10,7 +10,7 @@ import Slidebar from "@/components/Slidebar";
 import { useState } from "react";
 
 export default function Home() {
-  const [show, setShow] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
 
   return <div>
     <header className="flex items-start justify-between mb-8">

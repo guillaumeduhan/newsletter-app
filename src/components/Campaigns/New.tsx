@@ -3,15 +3,19 @@ import MainTemplate from '@/components/Template/Main';
 import { useAppContext } from '@/context';
 import { useCampaigns } from '@/hooks/useCampaigns';
 import { useEmails } from '@/hooks/useEmails';
+import { Campaign } from '@/types';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import Button from '../Button';
 
 export default function NewCampaign({
+  selected,
   onClose
 }: {
-  onClose: () => void
+  selected?: Campaign,
+  onClose?: () => void
 }) {
-  const { newCampaign, setNewCampaign, loading, saveCampaign } = useCampaigns();
+  const { newCampaign, setNewCampaign, loading, setLoading, saveCampaign } = useCampaigns();
   const { email, setEmail } = useEmails();
   const { user } = useAppContext()
 
@@ -28,6 +32,7 @@ export default function NewCampaign({
       const response = await saveCampaign({ ...newCampaign, user_id: user.id }, email);
 
       if (response) {
+        if (onClose) onClose();
         return toast.success(`Campaign successfully saved`)
       }
 
@@ -36,6 +41,21 @@ export default function NewCampaign({
       throw new Error(error);
     }
   };
+
+  useEffect(() => {
+    if (selected) {
+      const { email_id }: any = selected;
+      console.log(selected)
+      setNewCampaign(selected);
+      if (email_id) {
+        setEmail(email_id)
+      }
+    }
+  }, [selected])
+
+  useEffect(() => {
+    setLoading(false);
+  }, [])
 
   return <div>
     <header className='border-b flex items-center justify-between px-8 py-6'>

@@ -4,6 +4,7 @@ import { useState } from "react";
 export const useNavigation = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [active, setActive] = useState<string>('');
+  const [selected, setSelected] = useState<any>('');
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
@@ -17,6 +18,8 @@ export const useNavigation = () => {
     pathname,
     params,
     router,
-    searchParams
+    searchParams,
+    selected,
+    setSelected
   }
 }
