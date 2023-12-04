@@ -1,7 +1,9 @@
 'use client';
 
 import Button from "@/components/Button";
+import NewList from "@/components/Lists/New";
 import Loading from "@/components/Loading";
+import Slidebar from "@/components/Slidebar";
 import { useLists } from "@/hooks/useLists";
 import { useNavigation } from "@/hooks/useNavigation";
 import { List } from "@/types";
@@ -31,5 +33,8 @@ export default function Lists() {
         </div>}
       </div>}
     </main>
+    {show && <Slidebar>
+      <NewList onClose={() => setShow(false)} />
+    </Slidebar>}
   </div>
 }
