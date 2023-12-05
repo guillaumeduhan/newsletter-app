@@ -32,7 +32,10 @@ export default function NewCampaign({
       const response = await saveCampaign({ ...newCampaign, user_id: user.id }, email);
 
       if (response) {
-        if (onClose) onClose();
+        // if (onClose) onClose();
+        const { emailSaved, campaignSaved } = response;
+        setNewCampaign(campaignSaved);
+        setEmail(emailSaved);
         return toast.success(`Campaign successfully saved`)
       }
 
@@ -45,7 +48,6 @@ export default function NewCampaign({
   useEffect(() => {
     if (selected) {
       const { email_id }: any = selected;
-      console.log(selected)
       setNewCampaign(selected);
       if (email_id) {
         setEmail(email_id)
@@ -112,17 +114,15 @@ export default function NewCampaign({
       </div>
       <div className='grid w-full'>
         <MainTemplate
-          onContent={(content: any) =>
+          onContent={(content: any) => {
             setEmail((prev: any) => ({
               ...prev,
               content
             })
             )
-          }
+          }}
         />
       </div>
     </div>;
   </div>
-
-
 }

@@ -43,15 +43,18 @@ export const useCampaigns = () => {
       const emailSaved = await saveEmail(email)
 
       if (emailSaved) {
-        const { id } = emailSaved;
-        campaign.email_id = id;
+        const { id: emailId } = emailSaved;
+        campaign.email_id = emailId;
 
-        const { data, error } = await supabase
+        const { data: campaignSaved, error } = await supabase
           .from('campaigns')
           .upsert(campaign)
           .select()
         
-        if (data) return data
+        if (campaignSaved) return {
+          campaignSaved,
+          emailSaved
+        }
       }
       return emailSaved
     } catch (error: any) {

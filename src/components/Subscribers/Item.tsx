@@ -21,7 +21,7 @@ export default function SubscriberItem({
     setLoading(false);
   }, [])
 
-  return <div className={`item items-center grid grid-cols-3 cursor-pointer transition ${select ? 'border-none' : 'px-5 py-4 hover:bg-gray-50'}`}>
+  return <div className={`item text-sm items-center grid grid-cols-3 cursor-pointer transition ${select ? 'border-none' : 'px-3 py-2 hover:bg-gray-50'}`}>
     <div className='grid gap-2 col-span-1'>
       <p>{subscriber.email}</p>
       {!select && <p className='text-gray-500'>{dayjs(subscriber.created_at).format('MM-DD-YYYY')}</p>}
