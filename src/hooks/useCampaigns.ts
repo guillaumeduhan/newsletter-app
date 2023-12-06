@@ -2,18 +2,22 @@ import { supabase } from "@/lib/supabase";
 import { Campaign, Email } from "@/types";
 import { useState } from "react";
 
+const MODEL = {
+  name: "A new campaign",
+  from: "newsletter@codewithguillaume.com",
+  subject: undefined,
+  list_id: undefined,
+  status: 'Draft',
+  user_id: undefined,
+  email_id: undefined
+};
+
 export const useCampaigns = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [newCampaign, setNewCampaign] = useState<Campaign>({
-    name: "A new campaign",
-    from: "newsletter@codewithguillaume.com",
-    subject: undefined,
-    list_id: undefined,
-    status: 'Draft',
-    user_id: undefined,
-    email_id: undefined
-  });
+  const [newCampaign, setNewCampaign] = useState<Campaign>(MODEL);
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+
+  const startNewCampaign = () => setNewCampaign(MODEL);
 
   const saveEmail = async (email: Email) => {
     if (!email) return 'Missing email content!'
@@ -21,14 +25,23 @@ export const useCampaigns = () => {
     try {
       setLoading(true)
 
-      const { data, error } = await supabase
-        .from('emails')
-        .upsert(email)
+      if (email.id) {
+        const { data: existingEmail, error } = await supabase
+          .from("emails")
+          .upsert({ id: email.id, ...email })
+          .select()
+          .single()
+        
+        return existingEmail;
+      }
+
+      const { data: newEmail, error} = await supabase
+        .from("emails")
+        .insert(email)
         .select()
         .single()
       
-      if (data) return data
-      return false
+      return newEmail;
     } catch (error: any) {
       throw new Error(error)
     } finally {
@@ -46,17 +59,32 @@ export const useCampaigns = () => {
         const { id: emailId } = emailSaved;
         campaign.email_id = emailId;
 
+        if (campaign.id) {
+          const { data: campaignSaved, error } = await supabase
+            .from("campaigns")
+            .upsert({ id: campaign.id, ...campaign })
+            .select()
+            .single()
+
+          return {
+            campaignSaved,
+            emailSaved
+          }
+        }
+
         const { data: campaignSaved, error } = await supabase
-          .from('campaigns')
-          .upsert(campaign)
+          .from("campaigns")
+          .insert(campaign)
           .select()
-        
-        if (campaignSaved) return {
+          .single()
+
+        return {
           campaignSaved,
           emailSaved
         }
       }
-      return emailSaved
+
+      return undefined
     } catch (error: any) {
       throw new Error(error)
     } finally {
@@ -80,6 +108,32 @@ export const useCampaigns = () => {
     }
   }
 
+  const sendCampaign = async (campaign: Campaign, email: Email) => {
+    try {
+      setLoading(true);
+
+      const response = await fetch('/api/campaigns/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ campaign, email })
+      })
+
+      if (response) {
+        const data = await response.json();
+        console.log(data);
+        return response
+      }
+
+      return undefined
+    } catch (error: any) {
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     loading,
     setLoading,
@@ -88,6 +142,8 @@ export const useCampaigns = () => {
     campaigns,
     setCampaigns,
     saveCampaign,
-    getCampaigns
+    getCampaigns,
+    startNewCampaign,
+    sendCampaign
   }
 }

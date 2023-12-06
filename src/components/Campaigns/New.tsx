@@ -15,7 +15,7 @@ export default function NewCampaign({
   selected?: Campaign,
   onClose?: () => void
 }) {
-  const { newCampaign, setNewCampaign, loading, setLoading, saveCampaign } = useCampaigns();
+  const { newCampaign, setNewCampaign, loading, setLoading, saveCampaign, startNewCampaign, sendCampaign } = useCampaigns();
   const { email, setEmail } = useEmails();
   const { user } = useAppContext()
 
@@ -33,7 +33,7 @@ export default function NewCampaign({
 
       if (response) {
         // if (onClose) onClose();
-        const { emailSaved, campaignSaved } = response;
+        const { campaignSaved, emailSaved } = response;
         setNewCampaign(campaignSaved);
         setEmail(emailSaved);
         return toast.success(`Campaign successfully saved`)
@@ -42,6 +42,22 @@ export default function NewCampaign({
       toast.error(`Campaign could not be saved.`)
     } catch (error: any) {
       throw new Error(error);
+    }
+  };
+
+  const sendNewCampaign = async () => {
+    try {
+      setLoading(true);
+      const response = await sendCampaign(newCampaign, email);
+      
+      if (response) {
+        if (response.status === 200) return toast.success(`Campaign successfully sent`);
+      }
+      return toast.error(`Campaign failed to be sent!`);
+    } catch (error: any) {
+      throw new Error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,6 +72,7 @@ export default function NewCampaign({
   }, [selected])
 
   useEffect(() => {
+    if (!selected) startNewCampaign();
     setLoading(false);
   }, [])
 
@@ -65,7 +82,7 @@ export default function NewCampaign({
       <div className="flex gap-2">
         <Button label="Close" onClick={onClose} />
         <Button loading={loading} label="Save draft" onClick={() => saveDraft()} />
-        <Button loading={loading} color="primary" label="Send" onClick={onClose} />
+        <Button loading={loading} color="primary" label="Send" onClick={sendNewCampaign} />
       </div>
     </header>
     <div className='flex items-start justify-between w-full h-full'>
@@ -104,11 +121,12 @@ export default function NewCampaign({
             value={newCampaign?.list_id}
             onChange={handleChange}
           >
-            {[].map((i: any) => (
+            <option value="">To all subscribers</option>
+            {/* {[].map((i: any) => (
               <option key={i.id} value={i.id}>
                 {i}
               </option>
-            ))}
+            ))} */}
           </select>
         </div>
       </div>

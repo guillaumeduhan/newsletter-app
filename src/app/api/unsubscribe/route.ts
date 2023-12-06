@@ -1,9 +1,7 @@
 import UnsubscribeTemplate from "@/components/Emails/Unsubscribe";
+import { resend } from "@/lib/resend";
 import { supabase } from "@/lib/supabase";
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-
-const resend : any = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   const body = await request.json();

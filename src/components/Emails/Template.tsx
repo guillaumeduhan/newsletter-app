@@ -19,7 +19,7 @@ export default function Template({ content = 'Hello world' }: Props) {
         <Body className="font-sans text-gray-400 bg-gray-100 py-6">
           <Container className="my-6 bg-white shadow-sm">
             <Img
-              src={`${baseUrl}/static/NL.png`}
+              src={`${baseUrl}/banner.png`}
               width="100%"
               height="auto"
               alt="Codewithguillaume's newsletter"
